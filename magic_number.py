@@ -68,4 +68,5 @@ def print_game_result(magic_number, player_number):
     else:
         print(f"Game over... My number was {magic_number}")
 
+
 main()
