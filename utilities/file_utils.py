@@ -1,10 +1,11 @@
 import os
 
 
-def get_files(root_folder: str) -> list:
+def get_files(root_folder: str, name_filet=None) -> list:
     """
     This functions takes a string as a folder path and returns a list of files (str)
     :param root_folder: path like string
+    :param name_filet: Optional filter on files
     :return: List of files list[str]
     """
 
