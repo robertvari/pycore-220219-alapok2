@@ -1,4 +1,4 @@
-import random
+import random, os
 
 min_number = 0
 max_number = 10
@@ -6,6 +6,8 @@ max_tries = 3
 
 
 def main():
+    clear_window()
+
     # print some intro about the game
     intro()
 
@@ -28,6 +30,10 @@ def main():
         main()
     else:
         print("See you later!")
+
+
+def clear_window():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def intro():
