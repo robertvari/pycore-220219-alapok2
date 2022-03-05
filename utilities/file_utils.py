@@ -15,4 +15,7 @@ def get_files(root_folder: str, name_filet=None) -> list:
     # list comprehension
     result = [os.path.join(root_folder, i) for i in os.listdir(root_folder)]
 
+    if name_filet:
+        result = [i for i in result if name_filet.lower() in i.lower()]
+
     return result
