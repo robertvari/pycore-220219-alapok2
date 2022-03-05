@@ -11,6 +11,7 @@ def main():
 
     # get a random number: import random, random.randint(a, b)
     magic_number = random.randint(min_number, max_number)
+    print(f"DEBUG: {magic_number}")
 
     # get player number
     player_guess = get_player_number()
@@ -18,10 +19,15 @@ def main():
     # check player number
     player_guess = check_numbers(magic_number, player_guess)
 
-    # todo print game result
+    # print game result
+    print_game_result(magic_number, player_guess)
 
-    # todo ask player if he/she wants to play again
-    pass
+    # ask player if he/she wants to play again
+    play_again = input("Do you want to play again? (y/n)")
+    if play_again == "y":
+        main()
+    else:
+        print("See you later!")
 
 
 def intro():
@@ -50,6 +56,16 @@ def check_numbers(magic_number, player_number):
             print("Maybe next time!")
             break
 
+        print(f"Wrong number :( You have {_max_tries} tries left.")
+        player_number = get_player_number()
+
     return player_number
+
+
+def print_game_result(magic_number, player_number):
+    if player_number == str(magic_number):
+        print(f"You win!!! My number was {magic_number}")
+    else:
+        print(f"Game over... My number was {magic_number}")
 
 main()
