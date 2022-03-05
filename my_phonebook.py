@@ -9,9 +9,23 @@ def main():
 
     phonebook = load_phonebook()
 
-    add_person(phonebook)
+    user_choice = input()
 
-    save_phonebook(phonebook)
+    if user_choice == "3":
+        exit()
+    elif user_choice == "1":
+        # todo nice print
+        print(phonebook)
+        input("Press enter to continue...")
+        main()
+    elif user_choice == "2":
+        add_person(phonebook)
+        save_phonebook(phonebook)
+        input("Press enter to continue...")
+        main()
+    else:
+        print("I don't understand :(")
+        exit()
 
 
 def clear_window():
@@ -20,6 +34,7 @@ def clear_window():
 
 def intro():
     print("*"*50, "PHONEBOOK 2000", "*"*50)
+    print("1. Print phonebook\n2. Add person\n3. Exit program")
 
 
 def load_phonebook():
