@@ -11,6 +11,7 @@ def get_files(root_folder: str) -> list:
     assert os.path.exists(root_folder), f"Folder: {root_folder} does not exist."
     assert os.path.isdir(root_folder), f"root_folder must be a folder."
 
-    result = os.listdir(root_folder)
+    # list comprehension
+    result = [os.path.join(root_folder, i) for i in os.listdir(root_folder)]
 
     return result
