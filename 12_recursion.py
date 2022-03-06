@@ -10,6 +10,7 @@ def get_factorial(n):
 # result = get_factorial(5)
 # print(result)
 
+
 file_list = []
 get_files(
     root_folder=r"C:\Work\_PythonSuli\pycore-220219\photos",
