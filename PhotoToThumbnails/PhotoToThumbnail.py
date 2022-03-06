@@ -4,6 +4,7 @@ from utilities.file_utils import get_files
 
 
 THUMBNAIL_SIZE = 300
+job_queue = queue.Queue()
 
 
 def main():
@@ -12,6 +13,9 @@ def main():
 
     # collect all photos from root_folder and subfolders
     photo_files = collect_photos(root_folder)
+
+    # update job queue
+    [job_queue.put(i) for i in photo_files]
 
     # convert images to thumbnails
     thumbnail_worker(photo_files)
