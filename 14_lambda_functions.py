@@ -19,3 +19,7 @@ students = {
     "4": {"name": "Tóth Barna", "grade": 12},
     "5": {"name": "Kiss Elemér Aladár", "grade": 86},
 }
+
+sorted_ids = sorted(students, key=lambda id: students[id]["grade"])
+for id in sorted_ids:
+    print(students[id])
