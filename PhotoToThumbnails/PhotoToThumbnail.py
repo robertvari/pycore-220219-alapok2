@@ -1,4 +1,4 @@
-import os, time, threading, queue
+import os, time, threading, queue, shutil
 from PIL import Image
 from utilities.file_utils import get_files
 
@@ -11,6 +11,11 @@ def main():
     # get root_folder
     root_folder = get_root_folder()
 
+    # delete _thumbnails folder
+    thumbnail_folder_path = os.path.join(root_folder, "_thumbnails")
+    if os.path.exists(thumbnail_folder_path):
+        shutil.rmtree(thumbnail_folder_path, ignore_errors=True)
+
     # collect all photos from root_folder and subfolders
     photo_files = collect_photos(root_folder)
 
@@ -20,9 +25,10 @@ def main():
     # create thumbnail_folder
     thumbnail_folder = create_thumbnail_folder(root_folder)
 
-
     # convert images to thumbnails
-    thumbnail_worker(photo_files)
+    for _ in range(6):
+        t = threading.Thread(target=thumbnail_worker, args=[thumbnail_folder])
+        t.start()
 
 
 def get_root_folder():
