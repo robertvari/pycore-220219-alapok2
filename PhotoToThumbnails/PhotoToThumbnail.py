@@ -11,6 +11,7 @@ def main():
     photo_files = collect_photos(root_folder)
 
     # todo convert images to thumbnails
+    thumbnail_worker(photo_files)
 
 
 def get_root_folder():
@@ -39,10 +40,14 @@ def collect_photos(root_folder):
 def thumbnail_worker(photo_files):
     photo_root_folder = os.path.dirname(photo_files[0])
     thumbnail_folder = os.path.join(photo_root_folder, "_thumbnails")
+    if not os.path.exists(thumbnail_folder):
+        os.makedirs(thumbnail_folder)
 
     for file in photo_files:
         img = Image.open(file)
         img.thumbnail((300, 300))
-        img.save()
+
+        new_file_path = os.path.join(thumbnail_folder, os.path.basename(file))
+        img.save(new_file_path)
 
 main()
