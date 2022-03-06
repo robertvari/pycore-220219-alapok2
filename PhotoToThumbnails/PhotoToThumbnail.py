@@ -18,7 +18,7 @@ def main():
     [job_queue.put(i) for i in photo_files]
 
     # create thumbnail_folder
-
+    thumbnail_folder = create_thumbnail_folder(root_folder)
 
 
     # convert images to thumbnails
@@ -56,12 +56,17 @@ def create_thumbnail_folder(root_folder):
     return thumbnail_folder
 
 
-def thumbnail_worker(photo_files, thumbnail_folder):
-    for file in photo_files:
+def thumbnail_worker(thumbnail_folder):
+    while not job_queue.empty():
+        file = job_queue.get()
+        print(f"thumbnail_worker working on: {file}")
+
         img = Image.open(file)
         img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))
 
         new_file_path = os.path.join(thumbnail_folder, os.path.basename(file))
         img.save(new_file_path)
+
+        job_queue.task_done()
 
 main()
