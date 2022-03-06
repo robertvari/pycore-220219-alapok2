@@ -1,6 +1,9 @@
-import os
+import os, time, threading, queue
 from PIL import Image
 from utilities.file_utils import get_files
+
+
+THUMBNAIL_SIZE = 300
 
 
 def main():
@@ -10,7 +13,7 @@ def main():
     # collect all photos from root_folder and subfolders
     photo_files = collect_photos(root_folder)
 
-    # todo convert images to thumbnails
+    # convert images to thumbnails
     thumbnail_worker(photo_files)
 
 
@@ -45,7 +48,7 @@ def thumbnail_worker(photo_files):
 
     for file in photo_files:
         img = Image.open(file)
-        img.thumbnail((300, 300))
+        img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))
 
         new_file_path = os.path.join(thumbnail_folder, os.path.basename(file))
         img.save(new_file_path)
